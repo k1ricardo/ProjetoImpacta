@@ -49,4 +49,4 @@ def delete_produto(connection, product_id):
 
 if __name__=='__main__':
     connection = get_sql_connection()
-    print(delete_produto(connection, 1 ))
+    print(delete_produto(connection,1))
