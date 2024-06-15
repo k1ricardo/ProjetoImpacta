@@ -1,8 +1,8 @@
 
-var productModal = $("#product-modal");
+var productModal = $("#productModal");
     $(function () {
 
-        $.get(productListApiUri, function (response) {
+        $.get(productListApiUrl, function (response) {
             if(response) {
                 var tablet = '';
                 $.each(response, function(index, produto) {
@@ -17,6 +17,7 @@ var productModal = $("#product-modal");
             }
         })
     });
+    
 
     $("#saveProduct").on("click", function() {
 
@@ -51,9 +52,9 @@ var productModal = $("#product-modal");
     $(document).on("click", ".delete-product", function() {
         var tr = $(this).closest( "tr" );
         var data = {
-            produto_id : tr.data('id')
+            product_id : tr.data('id')
         };
-        var isDelete = confirm("Deseja realmente deletar este produto"+ tr.data( 'nome' )+" item?");
+        var isDelete = confirm("Deseja realmente deletar este produto"+ tr.data( 'nome' )+" categoria?");
         if  (isDelete){
              callApi("POST", productDeleteApiUrl, data);
         }
@@ -61,11 +62,11 @@ var productModal = $("#product-modal");
 
     productModal.on('hide.bs.modal', function(){
         $("#id").val('0');
-        $("nome, #unit, #price").val('');
+        $("nome, #categoria, #price").val('');
         productModal.find('.modal-title').text("Adicionar Novo  Produto");
     });
 
-    
+
 
   
 

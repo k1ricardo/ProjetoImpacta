@@ -1,4 +1,4 @@
-from flask import Flask,request, jsonify
+from flask import Flask, request, jsonify
 from flask.wrappers import Response
 from mysql.connector import connection
 import product_dao
@@ -19,9 +19,9 @@ def getProdutos():
 
 @app.route('/deletarProdutos', methods=['POST'])
 def deletarProdutos():
-    return_id = product_dao.delete_produto(connection, request.form['produto_id'])
+    return_id = product_dao.delete_produto(connection, request.form['product_id'])
     response = jsonify({
-        'produto_id': return_id
+        'product_id': return_id
     })
     response.headers.add('Access-Control-Allow-Origin','*')
     return response
@@ -32,9 +32,9 @@ def deletarProdutos():
 @app.route('/insertProduto', methods=['POST'])
 def insertProduto():
     request_payload = json.loads(request.form['data'])
-    produto_id = product_dao.insert_produto(connection, request_payload)
+    product_id = product_dao.insert_produto(connection, request_payload)
     response = jsonify({
-        'produto_id': produto_id
+        'product_id': product_id
     })
     response.headers.add('Access-Control-Allow-Origin','*')
     return response

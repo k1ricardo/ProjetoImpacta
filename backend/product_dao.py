@@ -3,16 +3,13 @@ from mysql.connector import connection
 
 def get_all_produtos(connection):
 
-
     cursor = connection.cursor()
-
-    query = ("SELECT produtos.product_id, produtos.nome, produtos.categoria, produtos.price_unit")
+    query = ("SELECT produtos.product_id, produtos.nome, produtos.categoria, produtos.price_unit FROM produtos")
 
     cursor.execute(query)
-
     response = []
 
-    for(product_id, nome, categoria, price_unit)in cursor:
+    for(product_id, nome, categoria, price_unit) in cursor:
         response.append({
 
             'produto_id':product_id, 
@@ -29,7 +26,9 @@ def get_all_produtos(connection):
 
 def insert_produto(connection, produto):
     cursor = connection.cursor()
-    query = ("INSERT INTO produtos" "(nome, categoria, price_unit)"" VALUES (%s,%s,%s)")
+    query = ("INSERT INTO produtos"
+             "(nome, categoria, price_unit)"
+             " VALUES (%s,%s,%s)")
     data = (produto['produto_nome'], produto['categoria'], produto['price_unit'])
     
     cursor.execute(query,data)
@@ -49,4 +48,4 @@ def delete_produto(connection, product_id):
 
 if __name__=='__main__':
     connection = get_sql_connection()
-    print(delete_produto(connection,1))
+    print(delete_produto(connection,28))
